@@ -1,3 +1,5 @@
 #!usr/bin/env groovy
 
-echo 'Mara'
+stage("Notify") {
+  echo 'Mara'
+}
