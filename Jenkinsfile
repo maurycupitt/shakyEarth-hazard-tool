@@ -9,12 +9,12 @@ stage('Testing') {
         }
 
         stage('Staging') {
-            notify('Staging')
+            notify('Staging', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
             echo 'Staging'
         }
 
         stage('Deploy') {
-            notify('Deploy')
+            notify('Deply', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
             echo 'Deploying'
         }
 } 
