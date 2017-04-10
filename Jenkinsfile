@@ -2,8 +2,10 @@
 
 node {
 stage('Testing') {
-            notify('Testing')
-            echo 'Testing'
+            notify('Testing', ${env.JOB_NAME}, ${env.BUILD_NUMBER})
+            echo ('Testing') 
+            echo ${env.JOB_NAME}
+            echo ${env.BUILD_NUMBER})
         }
 
         stage('Staging') {
@@ -18,8 +20,8 @@ stage('Testing') {
 } 
 
 
-def notify (stage) {
-  def postBody = '{ "summary": "' + stage + '"}'
+def notify (stage, job_name, builf_number) {
+  def postBody = '{ "summary": "' + stage + ':' + job_name + ':' + build_number + '"}'
 
   def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: postBody, url: "http://172.16.240.189:8080/api/v1/artifacts/generic-gateway"
   
