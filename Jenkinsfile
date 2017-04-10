@@ -27,7 +27,7 @@ def notify (stage, job_name, build_number) {
             '","description": ' + stage +  \
             '","status": "Done", \
             "created": "2001-10-08T18:20:34.000+0000", \
-            "location": "http://example.com", \
+            "location": "' + env.JOB_DISPLAY_URL + '", \
             "scm_revision": "String", \
             "scm_url": "http://example.com" \
             }'
