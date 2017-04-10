@@ -22,8 +22,7 @@ stage('Testing') {
 
 
 def notify (stage, job_name, build_number) {
-  def postBody = '{ \ 
-            "formatted_id": ' + ${job_name} +  \
+  def postBody = '{ "formatted_id": ' + ${job_name} +  \
             '",summary": ' + ${stage} + ' - ' + ${job_name} + ' - ' + ${build_number} +  \
             ',"description": ' + ${stage} + ', \
             ',"status": "Done", \
