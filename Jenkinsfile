@@ -29,13 +29,13 @@ def notify (stage, job_name, build_number) {
             "created": "2001-10-08T18:20:34.000+0000", \
             "location": "' + env.JOB_DISPLAY_URL + '", \
             "scm_revision": "String", \
-            "scm_url": "http://example.com" \
+            "scm_url": "' + env.RUN_DISPLAY_URL + '" \
             }'
   echo postBody
 
   def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: postBody, url: "http://172.16.240.189:8080/api/v1/artifacts/build-results"
   
-  echo("Status: "+response.status)
-  echo("Content: "+response.content)
+  echo("Status: " + response.status)
+  echo("Content: " + response.content)
   
 }
