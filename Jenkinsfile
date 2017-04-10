@@ -2,10 +2,10 @@
 
 node {
 stage('Testing') {
-            notify('Testing', ${env.JOB_NAME}, ${env.BUILD_NUMBER})
+            notify('Testing', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
             echo ('Testing') 
-            echo ${env.JOB_NAME}
-            echo ${env.BUILD_NUMBER}
+            echo "${env.JOB_NAME}"
+            echo "${env.BUILD_NUMBER}"
         }
 
         stage('Staging') {
