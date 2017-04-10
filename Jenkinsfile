@@ -22,10 +22,10 @@ stage('Testing') {
 
 
 def notify (stage, job_name, build_number) {
-  def postBody = '{ "formatted_id": ' + job_name +  \
-            ',"summary": ' + stage + ' - ' + job_name + ' - ' + build_number +  \
-            ',"description": ' + stage +  \
-            ',"status": "Done", \
+  def postBody = '{ "formatted_id": "' + job_name +  \
+            "',"summary": "' + stage + ' - ' + job_name + ' - ' + build_number +  \
+            "',"description": ' + stage +  \
+            "',"status": "Done", \
             "created": "2001-10-08T18:20:34.000+0000", \
             "location": "http://example.com", \
             "scm_revision": "String", \
