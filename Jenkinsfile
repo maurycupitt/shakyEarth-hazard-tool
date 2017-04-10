@@ -6,7 +6,7 @@ stage('Testing') {
             echo ('Testing') 
             echo "${env.JOB_NAME}"
             echo "${env.BUILD_NUMBER}"
-            echo env
+            echo sh(returnStdout: true, script: 'env')
         }
 
         stage('Staging') {
