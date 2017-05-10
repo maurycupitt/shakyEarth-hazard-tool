@@ -22,11 +22,12 @@ stage('Testing') {
 
 
 def notify (stage, job_name, build_number) {
+  def rightNow = new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC")) 
   def postBody = '{ "formatted_id": "' + job_name +  \
             '","summary": "' + stage + ' - ' + job_name + ' - ' + build_number +  \
             '","description": ' + stage +  \
             '","status": "Done", \
-            "created": "2001-10-08T18:20:34.000+0000", \
+            "created": rightNow, \
             "location": "' + env.JOB_DISPLAY_URL + '", \
             "scm_revision": "String", \
             "scm_url": "' + env.RUN_DISPLAY_URL + '" \
