@@ -34,7 +34,7 @@ def notify (stage, job_name, build_number) {
             }'
   echo postBody
 
-  def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: postBody, url: "http://172.16.240.202:8080/api/v1/artifacts/telemetry-in-builds"
+  def response = httpRequest acceptType: 'APPLICATION_JSON', contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: postBody, url: "http://172.16.240.213:8080/api/v1/artifacts/builds"
   
   echo("Status: " + response.status)
   echo("Content: " + response.content)
