@@ -27,7 +27,7 @@ def notify (stage, job_name, build_number) {
             '","summary": "' + stage + ' - ' + job_name + ' - ' + build_number +  \
             '","description": ' + stage +  \
             '","status": "Done", \
-            "created": "${rightNow}", \
+            "created": "' + rightNow + '", \
             "location": "' + env.JOB_DISPLAY_URL + '", \
             "scm_revision": "String", \
             "scm_url": "' + env.RUN_DISPLAY_URL + '" \
