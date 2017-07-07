@@ -1,1 +1,1 @@
-# shakyEarth-hazard-tool
+# SKATS Project
