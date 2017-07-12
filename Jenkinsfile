@@ -1,13 +1,35 @@
 #!usr/bin/env groovy
 
 node {
-stage('Testing') {
+    stage('Testing') {
             notify('Testing', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
             echo ('Testing') 
             echo "${env.JOB_NAME}"
             echo "${env.BUILD_NUMBER}"
             echo sh(returnStdout: true, script: 'env')
         }
+    stage('SonarQube analysis') { 
+        withSonarQubeEnv('Sonar') { 
+          sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.3.0.603:sonar ' + 
+          '-f all/pom.xml ' +
+          '-Dsonar.projectKey=com.huettermann:all:master ' +
+          '-Dsonar.login=$SONAR_UN ' +
+          '-Dsonar.password=$SONAR_PW ' +
+          '-Dsonar.language=java ' +
+          '-Dsonar.sources=. ' +
+          '-Dsonar.tests=. ' +
+          '-Dsonar.test.inclusions=**/*Test*/** ' +
+          '-Dsonar.exclusions=**/*Test*/**'
+        }
+    }
+    stage("SonarQube Quality Gate") { 
+        timeout(time: 1, unit: 'HOURS') { 
+           def qg = waitForQualityGate() 
+           if (qg.status != 'OK') {
+             error "Pipeline aborted due to quality gate failure: ${qg.status}"
+           }
+        }
+    }
 
         stage('Staging') {
             notify('Staging', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
