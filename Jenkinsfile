@@ -4,7 +4,7 @@ node {
     
     environment {
         SONAR_UN = 'admin'
-        $SONAR_PW = 'admin'
+        SONAR_PW = 'admin'
     }
     
     stage('Testing') {
