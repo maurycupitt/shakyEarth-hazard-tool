@@ -42,7 +42,7 @@ node {
         {
         "files": [
             {
-                "pattern": "all/target/all-(*).war",
+                "pattern": "src/java/*",
                 "target": "libs-snapshots-local/com/tasktop/field/{1}/"
             }
         ]
