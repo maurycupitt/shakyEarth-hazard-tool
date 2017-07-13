@@ -43,7 +43,7 @@ node {
         "files": [
             {
                 "pattern": "src/java/*",
-                "target": "generic-local/com/tasktop/field/{1}/"
+                "target": "generic-local/com/tasktop/field/java/"
             }
         ]
         }
@@ -52,16 +52,9 @@ node {
         buildInfo.env.capture = true 
         buildInfo=server.upload(uploadSpec) 
         server.publishBuildInfo(buildInfo) 
+        notify('Distribute Binaries', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
     }
-        stage('Staging') {
-            notify('Staging', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
-            echo 'Staging'
-        }
-
-        stage('Deploy') {
-            notify('Deply', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
-            echo 'Deploying'
-        }
+        
 } 
 
 
