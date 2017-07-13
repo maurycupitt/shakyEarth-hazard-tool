@@ -22,11 +22,11 @@ node {
         // requires SonarQube Scanner 2.8+
         def scannerHome = tool 'SonarQube Scanner 3';
         withSonarQubeEnv('Field SonarQube') {
-            sh "${scannerHome}/bin/sonar-scanner"
+            sh "${scannerHome}/bin/sonar-scanner -Dsonar.analysis.buildNumber=${env.BUILD_NUMBER}"
         }
     }
     stage("SonarQube Quality Gate") { 
-        timeout(time: 1, unit: 'MINUTE') { 
+        timeout(time: 1, unit: 'HOURS') { 
            def qg = waitForQualityGate() 
            if (qg.status != 'OK') {
              error "Pipeline aborted due to quality gate failure: ${qg.status}"
