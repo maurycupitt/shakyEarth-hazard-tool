@@ -43,7 +43,7 @@ node {
         "files": [
             {
                 "pattern": "src/java/*",
-                "target": "libs-snapshots-local/com/tasktop/field/{1}/"
+                "target": "generic-local/com/tasktop/field/{1}/"
             }
         ]
         }
