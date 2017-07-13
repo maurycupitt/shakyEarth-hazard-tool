@@ -43,7 +43,7 @@ node {
         "files": [
             {
                 "pattern": "all/target/all-(*).war",
-                "target": "libs-snapshots-local/com/huettermann/web/{1}/"
+                "target": "libs-snapshots-local/com/tasktop/field/{1}/"
             }
         ]
         }
