@@ -6,6 +6,10 @@ node {
         scannerHome = ''
     }
     
+    stage('SCM') {
+        git 'https://github.com/maurycupitt/skats.git/'
+    }
+    
     stage('Testing') {
             notify('Testing', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
             echo ('Testing') 
