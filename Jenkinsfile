@@ -1,6 +1,12 @@
 #!usr/bin/env groovy
 
 node {
+    
+    environment {
+        SONAR_UN = 'admin'
+        $SONAR_PW = 'admin'
+    }
+    
     stage('Testing') {
             notify('Testing', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
             echo ('Testing') 
@@ -8,18 +14,17 @@ node {
             echo "${env.BUILD_NUMBER}"
             echo sh(returnStdout: true, script: 'env')
         }
+    
     stage('SonarQube analysis') { 
         withSonarQubeEnv('Sonar') { 
           sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.3.0.603:sonar ' + 
           '-f all/pom.xml ' +
-          '-Dsonar.projectKey=com.huettermann:all:master ' +
+          '-Dsonar.projectKey=comn.tasktop.field.skats:all:master ' +
           '-Dsonar.login=$SONAR_UN ' +
           '-Dsonar.password=$SONAR_PW ' +
           '-Dsonar.language=java ' +
           '-Dsonar.sources=. ' +
-          '-Dsonar.tests=. ' +
-          '-Dsonar.test.inclusions=**/*Test*/** ' +
-          '-Dsonar.exclusions=**/*Test*/**'
+          '-Dsonar.tests=. '
         }
     }
     stage("SonarQube Quality Gate") { 
