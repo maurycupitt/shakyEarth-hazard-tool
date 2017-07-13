@@ -18,7 +18,7 @@ node {
             echo sh(returnStdout: true, script: 'env')
         }
     
-    stage('SonarQube analysis') {
+    stage('SonarQube Analysis') {
         // requires SonarQube Scanner 2.8+
         def scannerHome = tool 'SonarQube Scanner 3';
         withSonarQubeEnv('Field SonarQube') {
@@ -52,7 +52,6 @@ node {
         buildInfo.env.capture = true 
         buildInfo=server.upload(uploadSpec) 
         server.publishBuildInfo(buildInfo) 
-        notify('Distribute Binaries', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
     }
         
 } 
