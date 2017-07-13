@@ -3,8 +3,7 @@
 node {
     
     environment {
-        SONAR_UN = 'admin'
-        SONAR_PW = 'admin'
+        scannerHome = ''
     }
     
     stage('Testing') {
@@ -15,16 +14,11 @@ node {
             echo sh(returnStdout: true, script: 'env')
         }
     
-    stage('SonarQube analysis') { 
-        withSonarQubeEnv('Sonar') { 
-          sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.3.0.603:sonar ' + 
-          '-f all/pom.xml ' +
-          '-Dsonar.projectKey=comn.tasktop.field.skats:all:master ' +
-          '-Dsonar.login=$SONAR_UN ' +
-          '-Dsonar.password=$SONAR_PW ' +
-          '-Dsonar.language=java ' +
-          '-Dsonar.sources=. ' +
-          '-Dsonar.tests=. '
+    stage('SonarQube analysis') {
+        // requires SonarQube Scanner 2.8+
+        def scannerHome = tool 'SonarQube Scanner 3';
+        withSonarQubeEnv('My SonarQube Server') {
+            sh "${scannerHome}/bin/sonar-scanner"
         }
     }
     stage("SonarQube Quality Gate") { 
