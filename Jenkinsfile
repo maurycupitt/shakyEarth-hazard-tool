@@ -34,6 +34,25 @@ node {
         }
     }
 
+    stage ('Distribute Binaries') { 
+       def SERVER_ID = 'Field-Artifactory-Server' 
+        def server = Artifactory.server SERVER_ID
+        def uploadSpec = 
+        """
+        {
+        "files": [
+            {
+                "pattern": "all/target/all-(*).war",
+                "target": "libs-snapshots-local/com/huettermann/web/{1}/"
+            }
+        ]
+        }
+        """
+        def buildInfo = Artifactory.newBuildInfo() 
+        buildInfo.env.capture = true 
+        buildInfo=server.upload(uploadSpec) 
+        server.publishBuildInfo(buildInfo) 
+    }
         stage('Staging') {
             notify('Staging', "${env.JOB_NAME}", "${env.BUILD_NUMBER}")
             echo 'Staging'
